@@ -386,6 +386,9 @@
 		id.style.left="50%";
 		id.style.height="320px";
 	}
+	window.onresize=function(){
+		mini();
+	}
 	/*
 	var clearSlct= "getSelection" in window ? function(){
  		window.getSelection().removeAllRanges();
