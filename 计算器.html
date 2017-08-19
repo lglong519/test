@@ -239,7 +239,7 @@
 	</div>
 </body>
 <script>
-	//字符权限值函数
+	//比较按键优先级
 	function conpareBtn(n){
 		if(parseInt(n)>=0){
 			return 2;
@@ -250,12 +250,19 @@
 			else {return -2;}
 		}
 	}
+	//清除文本选择
+	var clearSlct= "getSelection" in window ? function(){
+ 		window.getSelection().removeAllRanges();
+	} : function(){
+ 		document.selection.empty();
+	};
 	function setval(idd){				
 		var id=document.getElementById(idd),inh=id.innerHTML,tmp;
 		var lab=document.getElementById("lab1"),arr=(lab.innerHTML).split("");
 		var lab2=document.getElementById("lab2");
 		var cpi=conpareBtn(inh),cpb=conpareBtn(arr[arr.length-1]);
 		var check=false;
+		clearSlct();
 		//首要条件: 如果是c按钮,清空所有数据
 		if (idd=="clear"||lab2.innerHTML.charAt(lab2.innerHTML.length-1)=="零"){
 			lab.innerHTML="";
@@ -390,11 +397,6 @@
 		mini();
 	}
 	/*
-	var clearSlct= "getSelection" in window ? function(){
- 		window.getSelection().removeAllRanges();
-	} : function(){
- 		document.selection.empty();
-	};
 	window.onmouseup=function(){
 		clearSlct();
 	}
