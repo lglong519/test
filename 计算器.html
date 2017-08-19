@@ -16,11 +16,13 @@
 			height:320px;
 			border:1px solid #ccddee;
 			border-radius:5px 5px 0 0;
-			margin:50px auto;
+			margin:50px auto 50px -112.5px;
 			box-shadow:0 1px 2px #666,0 0 1px #666,0 0 1px #666;
 			overflow:hidden;
-			left:50px;
-			bottom:50px
+			position:fixed;
+			left:50%;
+			top:50px;
+			transition: left,top,height 1s,1s,1s;
 		}
 		.frame:hover{
 			background:#ccddee;
@@ -170,9 +172,24 @@
 			height:66px;
 			font-size:16px;			
 		}
+		button#open{
+			margin: 20px;
+			height:40px;
+			padding: 0 10px;
+			line-height:30px;
+			font-size:24px;
+			outline:none;
+			background:linear-gradient(to bottom, #FFFFFF 5%, #FDEED2);
+			border:1px solid  #999;
+			display:none;
+		}
+		button#open:hover{
+			outline:#6699FF solid 1px;
+		}
 	</style>
 </head>
 <body>
+	<button id="open">open</button>
 	<div class="frame" id="hide">
 		<div class="header">
 			<span>计算器</span><span class=" rt close" onclick="closeCal();">x</span><span class="rt max" onclick="maxi();">口</span><span class="mini rt" onclick="mini();">-</span>
@@ -343,21 +360,42 @@
 			}
 		}//!c			
 	}
+	var open=document.getElementById("open");
+	var id=document.getElementById("hide");
+	open.onclick=function(){
+		id.style.display="block";
+		open.style.display="none";
+		maxi();
+		id.style.height="0px";
+		setTimeout(function(){
+			id.style.height="320px";
+		}, 10);
+	}
 	function closeCal(){
-		var id=document.getElementById("hide");
 		id.style.display="none";
+		open.style.display="block";
 	}
 	function mini(){
-		var id=document.getElementById("hide");
+		height=document.documentElement.clientHeight-150+"px";
 		id.style.height="30px";
-		id.style.position="fixed";
-		id.style.margin="0";
+		id.style.left="162px";
+		id.style.top=height;
 	}
 	function maxi(){
-		var id=document.getElementById("hide");
+		id.style.top="50px";
+		id.style.left="50%";
 		id.style.height="320px";
-		id.style.margin="50px auto";
-		id.style.position="";
 	}
+	/*
+	var clearSlct= "getSelection" in window ? function(){
+ 		window.getSelection().removeAllRanges();
+	} : function(){
+ 		document.selection.empty();
+	};
+	window.onmouseup=function(){
+		clearSlct();
+	}
+	*/
+	//written by lglong519
 </script>
 </html>
