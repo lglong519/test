@@ -4,8 +4,8 @@
 	<meta charset="utf-8" />
 	<title>New Document</title>
 	<meta name="generator" content="EverEdit" />
-	<meta name="author" content="lglong519" />
-	<meta name="keywords" content="9527" />
+	<meta name="author" content="" />
+	<meta name="keywords" content="" />
 	<meta name="description" content="" />
 	<script src="scripts/more Fun.js"></script>
 	<style>
@@ -69,6 +69,11 @@
 <script type="text/javascript">
 	var kuaisu=document.getElementById("kuaisu");
 	kuaisu.onchange=function(){ //textarea绑定改变事件
+		var odform=document.getElementById("odform");
+		var ipts=odform.getElementsByTagName("input");
+		for(var i=0;i<ipts.length;i++){ //先清空input旧的数据
+			ipts[i].type!="button"&&(ipts[i].value="");
+		}
 		var val=kuaisu.value;
 		if(val.trim()!=""){
 			var arr=val.split(/\n/);//用换行符切割文本
@@ -79,13 +84,8 @@
 				if(data.length>1){
 					newArr[data[0]]=data[1];
 				}
-			}
-			var odform=document.getElementById("odform");
+			}			
 			var labs=odform.getElementsByTagName("label");
-			var ipts=odform.getElementsByTagName("input");
-			for(var i=0;i<ipts.length;i++){ //先清空input旧的数据
-				ipts[i].type!="button"&&(ipts[i].value="");
-			}
 			for(var i=0,text;i<labs.length;i++){ //遍历每个label,查找与newArr里下标对应的元素
 				text=labs[i].textContent.replace("*","");
 				if (newArr[text]){ //找到对应的元素后将newArr对应元素的内容填入标签的兄弟input元素的value
