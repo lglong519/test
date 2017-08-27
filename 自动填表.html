@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8" />
+	<title>New Document</title>
+	<meta name="generator" content="EverEdit" />
+	<meta name="author" content="" />
+	<meta name="keywords" content="" />
+	<meta name="description" content="" />
+	<link rel="stylesheet" href=""/>
+	<style>
+		#odform{background-color:#e4e4e4;width:430px;margin: 20px auto;color:#666;overflow:hidden;}
+		#odform div{margin:20px;height:40px;clear:both;}
+		#odform div>input,textarea{float:right;border:none;height:40px;width:300px;border-radius:5px;background-color:#FCFCFC;}
+		textarea{margin-bottom:20px;height:200px;}
+		#odform div>input.button{background-color:#A5A5A5;}
+	</style>
+</head>
+<body>
+	<div id="odform" class="">
+		<form action="" id="myfrom">
+			<div class="">
+				<label for="test">快速填表</label>
+				<textarea name=""id="kuaisu"></textarea>
+			</div>
+			<div class="">
+				<label for="test">用户姓名<span>*</span></label>
+				<input type="text" name=""/>
+			</div>
+			<div class="">
+				<label for="test">联系电话<span>*</span></label>
+				<input type="text" name=""/>
+			</div>
+			<div class="">
+				<label for="test">帐号<span>*</span></label>
+				<input type="text" name=""/>
+			</div>
+			<div class="">
+				<label for="test">区县<span>*</span></label>
+				<input type="text" name=""/>
+			</div>
+			<div class="">
+				<label for="test">详细地址<span>*</span></label>
+				<input type="text" name=""/>
+			</div>
+			<div class="">
+				<label for="test">序列号<span>*</span></label>
+				<input type="text" name=""/>
+			</div>
+			<div class="">
+				<label for="test">地址<span>*</span></label>
+				<input type="text" name=""/>
+			</div>
+			<div class="">
+				<label for="test">端口<span>*</span></label>
+				<input type="text" name=""/>
+			</div>
+			<div class="">
+				<label for="test">人员<span>*</span></label>
+				<input type="text" name=""/>
+			</div>
+			<div class="">
+				<input type="button" class="button" value="完成" onclick="">
+			</div>
+		</form>
+	</div>
+	
+</body>
+<script type="text/javascript">
+	var kuaisu=document.getElementById("kuaisu");
+	kuaisu.onchange=function(){ //textarea绑定改变事件
+		var val=kuaisu.value;
+		if(val.trim()!=""){
+			var arr=val.split(/\n/);//用换行符切割文本
+			var newArr=[];
+			//遍历每一行,将每行内容放入关联数组中,数组下标为冒号左边文字
+			for(var i of arr){
+				var data=i.replace(/\s/g,"").split(":");
+				if(data.length>1){
+					newArr[data[0]]=data[1];
+				}
+			}
+			var odform=document.getElementById("odform");
+			var labs=odform.getElementsByTagName("label");
+			for(var i=0,text;i<labs.length;i++){ //遍历每个label,查找与newArr里下标对应的元素
+				text=labs[i].textContent.replace("*","");
+				if (newArr[text]){ //找到对应的元素后将newArr对应元素的内容填入标签的兄弟input元素的value
+					labs[i].parentNode.lastElementChild.value=newArr[text];
+				}
+			}
+		}
+	}//textarea失去焦点触发
+</script>
+</html>

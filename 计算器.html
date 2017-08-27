@@ -251,11 +251,16 @@
 			else {return -2;}
 		}
 	}
+<<<<<<< HEAD
+=======
+	//清除文本选择
+>>>>>>> origin/master
 	var clearSlct= "getSelection" in window ? function(){
  		window.getSelection().removeAllRanges();
 	} : function(){
  		document.selection.empty();
 	};
+<<<<<<< HEAD
 	var calc=document.getElementById("calc");
 	calc.onclick=function(){
 		var src=event.srcElement||event.target;
@@ -263,6 +268,10 @@
 	}
 	function setval(elem){				
 		var btnVal=elem.innerHTML,tmp;
+=======
+	function setval(idd){				
+		var id=document.getElementById(idd),inh=id.innerHTML,tmp;
+>>>>>>> origin/master
 		var lab=document.getElementById("lab1"),arr=(lab.innerHTML).split("");
 		var lab2=document.getElementById("lab2");
 		var cpi=conpareBtn(btnVal),cpb=conpareBtn(arr[arr.length-1]);
