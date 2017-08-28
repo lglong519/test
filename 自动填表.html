@@ -2,7 +2,7 @@
 <html>
 <head>
 	<meta charset="utf-8" />
-	<title>New Document</title>
+	<title>快速填表</title>
 	<meta name="generator" content="EverEdit" />
 	<meta name="author" content="" />
 	<meta name="keywords" content="" />
@@ -79,8 +79,8 @@
 			var arr=val.split(/\n/);//用换行符切割文本
 			var newArr=[];
 			//遍历每一行,将每行内容放入关联数组中,数组下标为冒号左边文字
-			for(var i of arr){
-				var data=i.replace(/\s/g,"").split(/[:：]/);
+			for(var i in arr){
+				var data=arr[i].replace(/\s/g,"").split(/[:：]/);
 				if(data.length>1){
 					newArr[data[0]]=data[1];
 				}
