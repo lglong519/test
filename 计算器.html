@@ -4,6 +4,7 @@
 	<meta charset="utf-8" />
 	<title>计算器</title>
 	<link rel="icon" href="images/caculate.ico" type="image/x-ico"/>
+	<script src="http://www.lglong519.com/Tarena/css3/more%20Fun/more%20Fun.js"></script>
 	<style type="text/css">
 		*{
 			margin:0;
@@ -251,16 +252,11 @@
 			else {return -2;}
 		}
 	}
-<<<<<<< HEAD
-=======
-	//清除文本选择
->>>>>>> origin/master
 	var clearSlct= "getSelection" in window ? function(){
  		window.getSelection().removeAllRanges();
 	} : function(){
  		document.selection.empty();
 	};
-<<<<<<< HEAD
 	var calc=document.getElementById("calc");
 	calc.onclick=function(){
 		var src=event.srcElement||event.target;
@@ -268,10 +264,6 @@
 	}
 	function setval(elem){				
 		var btnVal=elem.innerHTML,tmp;
-=======
-	function setval(idd){				
-		var id=document.getElementById(idd),inh=id.innerHTML,tmp;
->>>>>>> origin/master
 		var lab=document.getElementById("lab1"),arr=(lab.innerHTML).split("");
 		var lab2=document.getElementById("lab2");
 		var cpi=conpareBtn(btnVal),cpb=conpareBtn(arr[arr.length-1]);
@@ -386,14 +378,12 @@
 	open.onclick=function(){
 		hide.style.display="block";
 		open.style.display="none";
-		
-		hide.style.height="0px";
 		setTimeout(function(){
-			//hide.style.height="320px";
 			maxi();
 		}, 10);
 	}
 	function closeCal(){
+		hide.style.height="0px";
 		hide.style.display="none";
 		open.style.display="block";
 	}
@@ -409,14 +399,15 @@
 		hide.style.height="320px";
 	}
 	window.onresize=function(){
-		if(!typeof(getComputedStyle)){
-			var height=getComputedStyle(hide).height;
+		var height;
+		if(window.getComputedStyle){
+			height=getComputedStyle(hide).height;
 		}else{
-			var height=hide.currentStyle["height"];
+			height=hide.currentStyle["height"];
 		}
 		if(height!="320px"){
-				mini();
-			}
+			mini();
+		}
 	}
 	/*
 	window.onmouseup=function(){
