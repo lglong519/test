@@ -1,4 +1,5 @@
 (function ($) {
+	new WOW().init();
 	jQuery(window).load(function() {
 		jQuery("#preloader").delay(100).fadeOut("slow");
 		jQuery("#load").delay(100).fadeOut("slow");
@@ -36,7 +37,7 @@ bg_music.onclick=function(){
 }
 
 	var degree=180;
-	turnOn(1);
+	setTimeout("turnOn(1)",1600);
 	function turnOn(n) {
 		if(n==1){
 			degree--;
@@ -50,15 +51,26 @@ bg_music.onclick=function(){
 		$("#left").css({ '-moz-transform': 'rotatey(' + degree + 'deg)'});
 		if(degree<90 || window.navigator.userAgent.search("Trident")!=-1){//|| !("transform" in document.documentElement.style)
 			$("#left .first").hide();
+		}else{
+			$("#left .first").show();
 		}
 		// Animate rotation with a recursive call
-		if(n==1&&degree>0){
+		if((n==1&&degree>0)||(n==0&&degree<180)){
 			setTimeout(function(){turnOn(n)},20);
-		}else if(n==0&&degree<180){
-
 		}
-
+		if(n==0&&degree==180){
+			return;
+		}
+		
 	}
+	$("#left").click(function(){
+	if(degree==0){
+		turnOn(0);
+	}else if(degree==180){
+		turnOn(1);
+		return false;
+	}
+});
 //图片大小
 if($("#left .second").height()!=0){
 	$("#left .first").height($("#left .second").height());
