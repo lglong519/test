@@ -41,6 +41,8 @@ body {
   font-family: "Helvetica Neue", "Microsoft Yahei", "SimHei", Helvetica, Arial, sans-serif;
   color: #666;
   background-color: #fff;
+  background: url(../img/landscape.jpg) no-repeat;
+  background-size: 100% 100%;
 }
 #bg_music {
   position: fixed;
@@ -249,12 +251,50 @@ a:focus {
     opacity: 0.1;
   }
 }
+.container {
+  text-align: center;
+  margin-top: 1em;
+}
+#invitation img {
+  display: inline-block;
+}
+#invitation #left {
+  z-index: 5;
+  text-align: right;
+  padding-right: 0;
+  transform-style: preserve-3d;
+  -moz-transform-style: preserve-3d;
+  -webkit-transform-style: preserve-3d;
+  -ms-transform-style: preserve-3d;
+  transform-origin: right center;
+  -moz-transform-origin: right center;
+  -webkit-transform-origin: right center;
+  -ms-transform-origin: right center;
+  -ms-transform: rotate3D(0, 1, 0, 180deg);
+  -moz-transform: rotate3D(0, 1, 0, 180deg);
+  -webkit-transform: rotate3D(0, 1, 0, 180deg);
+}
+#invitation #left .first {
+  position: absolute;
+  top: 0;
+  right: 0;
+  transform: translatez(-1px);
+  -webkit-transform: translatez(-1px);
+  -moz-transform: translatez(-1px);
+  -ms-transform: translatez(-1px);
+  z-index: 9;
+}
+#invitation #left img.second {
+  position: relative;
+}
+#invitation #right {
+  text-align: left;
+  padding-left: 0;
+}
 #load {
   z-index: 9999;
   opacity: 0.75;
   font-size: 26px;
-  width: 234px;
-  height: 14px;
   position: absolute;
   top: 40%;
   margin: 0 auto 0 auto;
@@ -855,7 +895,7 @@ Parallax
     -moz-animation-timing-function: linear;
 }
 
-@-webkit-keyframes pulse {    
+@-webkit-keyframes pulse {
 0 {
     -webkit-transform: scale(1);
     transform: scale(1);
@@ -872,7 +912,7 @@ Parallax
 }
 }
 
-@-moz-keyframes pulse {    
+@-moz-keyframes pulse {
 0 {
     -moz-transform: scale(1);
     transform: scale(1);
