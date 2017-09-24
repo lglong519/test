@@ -48,7 +48,7 @@ bg_music.onclick=function(){
 		$("#left").css({ '-ms-transform': 'rotatey(' + degree + 'deg)'});
 		$("#left").css({ 'WebkitTransform': 'rotatey(' + degree + 'deg)'});
 		$("#left").css({ '-moz-transform': 'rotatey(' + degree + 'deg)'});
-		if(degree==0 || window.navigator.userAgent.search("Trident")!=-1){//|| !("transform" in document.documentElement.style)
+		if(degree<90 || window.navigator.userAgent.search("Trident")!=-1){//|| !("transform" in document.documentElement.style)
 			$("#left .first").hide();
 		}
 		// Animate rotation with a recursive call
