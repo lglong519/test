@@ -61,7 +61,7 @@ bg_music.onclick=function(){
 	}
 //图片大小
 if($("#left .second").height()!=0){
-	$("#left .first").height();
+	$("#left .first").height($("#left .second").height());
 }
 window.onresize=function(){
 	$("#left .first").height($("#left .second").height());
