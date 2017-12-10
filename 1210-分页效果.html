@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title></title>
+        <style type="text/css">
+            *{padding: 0;margin: 0;}
+            ul li{width: 30px;height: 30px;line-height: 30px;text-align: center;border: 1px solid #ccc;float: left;
+                margin-right: 0.5em;list-style: none;cursor: pointer;}
+            ul li:first-child,li:last-child{border: none;padding-right: .5em;}
+            .active{background: #555;color: #fff;}
+            li:first-child::before{content: "\00AB";margin-right: .3em;}
+            li:last-child::after{content: "\00BB";margin-left: .3em;}
+             
+        </style>
+    </head>
+    <body>
+        <ul>
+            <li>pre</li>
+            <li class="active">1</li>
+            <li>2</li>
+            <li>3</li>
+            <li>4</li>
+            <li>5</li>
+            <li>next</li>  
+        </ul>
+        <script type="text/javascript">
+            window.onload=function(){
+                var li=document.getElementsByTagName('li');
+                var before=document.getElementsByClassName('active');
+                for(var i=0;i<li.length;i++){
+                    //闭包获取当前i
+                   (function(i) {
+                       li[i].onclick=function(){
+                        //如果是数字按钮则切换,将当前按钮class设置为active
+                        if(i>0&&i<li.length-1){
+                            if(this.className.indexOf('active')==-1){
+                                before[0].className='';
+                                this.className='active';
+                            }
+                            //如果不是数字按钮,先获得active标签的下标,然后根据左右按钮的点击设置对应位置的按钮为active
+                        }else{
+                            for(var n=1;n<li.length-1;n++){
+                                if(li[n].className.indexOf('active')>-1){
+                                    break;
+                                }
+                            }
+                            //如果是左按钮
+                            if(i==0&&n!=1){
+                                before[0].className='';
+                                li[--n].className='active';
+                            //如果是右按钮
+                            }else if(i==li.length-1&&n!=li.length-2){
+                                before[0].className='';
+                                li[++n].className='active';
+                            }
+                        }
+                    }
+                   })(i);
+                    
+                }
+            }
+        </script>
+    </body>
+</html>
