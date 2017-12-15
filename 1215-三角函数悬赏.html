@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name='viewport' content='width=device-width,initial-scale=1.0'/>
+    <title>三角函数</title>
+    <style>
+        #div{
+            position:relative;  top:100px;  left:100px;  
+            height:0;  
+            width:0;  
+            border-style:solid;  
+            border-color:transparent  transparent #000;  
+            border-width:0 10px 10px;
+            transform: rotateZ(0deg) translate(0 , 0);  
+        }
+        .l1{
+	        position: absolute;
+	        left:0;
+	        top:156px;
+	        width:100vw;
+	        height:0;
+	        border-top:1px solid #ddd;
+        }
+        .l2{
+	        position: absolute;
+	        top:0;
+	        left:118px;
+	        height:100vh;
+	        width:0;
+	        border-right:1px solid #ddd;
+        }
+    </style>
+</head>
+<body>
+
+	<div class='l1'></div>
+	<div class='l2'></div>
+	<div></div>
+    <p>上下左右移动 , ctrl+左右旋转</p>
+    <div id='div'></div>
+
+    <script>
+        
+        var div=document.querySelector('#div')
+        var y=0
+        var x=0
+        var deg=0
+        document.onkeydown=function (e){
+            if(e.ctrlKey){
+                if(e.keyCode==37){
+                    deg-=15
+                }
+                if(e.keyCode==39){
+                    deg+=15
+                }
+                if(deg<0){
+                    deg+=360
+                }
+                if(deg>360){
+                    deg-=360
+                }
+            }
+            else{
+                if(e.keyCode==37){
+                    x-=10
+                }
+                if(e.keyCode==39){
+                    x+=10
+                }
+
+                if(e.keyCode==38){
+                    y-=10
+                }
+                if(e.keyCode==40){
+                    y+=10
+                }
+            }
+            var trueTranslate=getTrueTranslate(deg,x,y)
+            div.style.transform="rotateZ("+deg+"deg) translate("+trueTranslate.x+"px , "+trueTranslate.y+"px)"
+        }
+
+        // 完成这个方法 , 使小三角移动的时候 , 不管处于任何角度都可以得到正确的位移 , 按右向右移动10 , 按上向上移动10 , 而不是沿着箭头的方向移动
+        // 需要使用到三角函数
+        function getTrueTranslate(deg,x,y){
+			var angle=deg,xy={x:x,y:y};
+            if(deg>90&&deg<180){
+	            angle=180-deg;
+            }
+            if(deg>180&&deg<270){
+	            angle=deg-180;
+            }
+            if(deg>270){
+	            angle=360-deg;
+            }
+            var cos = Math.cos(Math.PI/180*angle);
+            var sin = Math.sin(Math.PI/180*angle);
+            var tan=Math.tan(Math.PI/180*angle);
+            if(x==0&&y==0){
+                return xy;
+            }
+            if(deg==0||deg==360){
+                return xy;
+            }
+            if(deg==90){
+                xy.x=y;
+                xy.y=-x;
+            }
+            if(deg==180){
+                xy.x=-x;
+                xy.y=-y;
+            }
+            if(deg==270){
+                xy.x=-y;
+                xy.y=x;
+	        }
+	        if(deg>0&&deg<90){
+    	        if(x==0){
+        	        xy.x=y*sin;
+                    xy.y=y*cos;
+    	        }else if(y==0){
+        	        xy.x=x*cos;
+                    xy.y=-x*sin;
+    	        }else{//使用x,y的坐标值计算出小三角实际的坐标值
+        	        if(y>0){
+            	        xy.x=(y+x/tan)*sin;
+            	        xy.y=Math.sqrt(Math.pow(xy.x*sin-y,2)+Math.pow(xy.x*cos-x,2));
+            	        xy.x*sin-y>0&&(xy.y=-xy.y);
+        	        }
+        	        if(y<0){
+            	        xy.y=-(x-y/tan)*sin;
+            	        xy.x=Math.sqrt(Math.pow(-xy.y*sin-x,2)+Math.pow(xy.y*cos-y,2));
+            	        -xy.y*sin-x>0&&(xy.x=-xy.x);
+        	        }
+    	        }
+	        }
+		    if(deg>90&&deg<180){
+    		    if(x==0){
+        	        xy.x=y*sin;
+                    xy.y=-y*cos;
+    	        }else if(y==0){
+        	        xy.x=-x*cos;
+                    xy.y=-x*sin;
+    	        }else{
+        	        if(y>0){
+            	        xy.y=-(y+x*tan)*cos;
+            	        xy.x=Math.sqrt(Math.pow(xy.y*cos+y,2)+Math.pow(xy.y*sin+x,2));
+            	        -xy.y*sin-x<0&&(xy.x=-xy.x);
+        	        }
+        	        if(y<0){
+            	        xy.x=-(x-y*tan)*cos;
+            	        xy.y=Math.sqrt(Math.pow(-xy.x*sin+y,2)+Math.pow(-xy.x*cos-x,2));
+            	        -xy.x*sin+y>0&&(xy.y=-xy.y);
+        	        }
+    	        }
+	        }
+	        if(deg>180&&deg<270){
+    		    if(x==0){
+        	        xy.x=-y*sin;
+                    xy.y=-y*cos;
+    	        }else if(y==0){
+        	        xy.x=-x*cos;
+                    xy.y=x*sin;
+    	        }else{
+        	        if(y>0){
+            	        xy.x=-(y+x/tan)*sin;
+            	        xy.y=Math.sqrt(Math.pow(-xy.x*sin-y,2)+Math.pow(-xy.x*cos-x,2));
+            	        -xy.x*sin-y<0&&(xy.y=-xy.y);
+        	        }
+        	        
+        	        if(y<0){
+            	        xy.y=(x-y/tan)*sin;
+            	        xy.x=Math.sqrt(Math.pow(xy.y*sin-x,2)+Math.pow(xy.y*cos+y,2));
+            	        xy.y*sin-x<0&&(xy.x=-xy.x);
+        	        }
+    	        }
+	        }
+		    if(deg>270&&deg<360){
+    		    if(x==0){
+        	        xy.x=-y*sin;
+                    xy.y=y*cos;
+    	        }else if(y==0){
+			        xy.y=x*sin;
+				    xy.x=x*cos;
+		        }else{
+        	        if(y>0){
+            	        xy.y=(y+x*tan)*cos;
+            	        xy.x=Math.sqrt(Math.pow(xy.y*sin-x,2)+Math.pow(xy.y*cos-y,2));
+            	        xy.y*sin-x>0&&(xy.x=-xy.x);
+        	        }
+        	        if(y<0){
+            	        xy.x=(x-y*tan)*cos;
+            	        xy.y=Math.sqrt(Math.pow(xy.x*sin+y,2)+Math.pow(xy.x*cos-x,2));
+            	        xy.x*cos-x>0&&(xy.y=-xy.y);
+        	        }
+    	        }
+		    }
+            return xy;
+        }
+		
+    </script>
+</body>
+</html>
