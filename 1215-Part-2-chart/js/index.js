@@ -76,8 +76,10 @@
 	myChart.setOption(option);
 	$.ajax({
 		url:'https://7b1e898b18f3fdf27ac94f17d4d62675@mixpanel.com/api/2.0/segmentation/?from_date=2017-12-1&to_date=2017-12-7&type=unique&event=viewed%20store',
+		//xhrFields: {withCredentials: true}, crossDomain:true, 
 		dataType:'jsonp',
 		success:function(datas){
+			console.log(datas);
 			//成功获取数据后将数据注入表格
 			if(typeof(datas)=="object"){
 				for(var i in datas.data.values["viewed store"]){
@@ -93,6 +95,7 @@
 			}
 		}
 	});
+	
 }();
 	
 
