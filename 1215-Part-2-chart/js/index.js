@@ -75,8 +75,8 @@
 	};
 	myChart.setOption(option);
 	$.ajax({
-		url:'https://7b1e898b18f3fdf27ac94f17d4d62675@mixpanel.com/api/2.0/segmentation/?from_date=2017-12-1&to_date=2017-12-7&type=unique&event=viewed%20store',
-		//xhrFields: {withCredentials: true}, crossDomain:true, 
+		url:'https://mixpanel.com/api/2.0/segmentation/?from_date=2018-03-1&to_date=2018-03-7&type=unique&event=viewed%20store',
+		
 		dataType:'jsonp',
 		success:function(datas){
 			console.log(datas);
